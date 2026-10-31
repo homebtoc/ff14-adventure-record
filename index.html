@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FF14 Clash Burn冒険録</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    font-family:"Yu Gothic", sans-serif;
+}
+
+.background{
+    position:fixed;
+    width:100%;
+    height:100vh;
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    transition:opacity 2s ease-in-out;
+
+    z-index:-2;
+}
+
+.overlay{
+    position:fixed;
+
+    width:100%;
+    height:100vh;
+
+    background:rgba(0,0,0,0.25);
+
+    z-index:-1;
+}
+
+.content{
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+}
+
+.title{
+    position:absolute;
+    top:22%;
+
+    font-size:4rem;
+    font-weight:bold;
+
+    text-shadow:
+        0 0 10px rgba(0,0,0,.8),
+        0 0 20px rgba(0,0,0,.8);
+}
+
+.ff14{
+    color:silver;
+}
+
+.clash{
+    color:#2da1ff;
+}
+
+.adventure{
+    color:#c58a43;
+}
+
+.start-button{
+
+    padding:20px 80px;
+
+    font-size:2rem;
+    font-weight:bold;
+
+    border:none;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    background:
+        rgba(255,255,255,0.8);
+
+    transition:all .3s;
+}
+
+.start-button:hover{
+
+    transform:scale(1.1);
+
+    background:white;
+
+    box-shadow:0 0 20px white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="bg" class="background"></div>
+
+<div class="overlay"></div>
+
+<div class="content">
+
+    <div class="title">
+
+        <span class="ff14">FF14</span>
+        <span class="clash"> Clash Burn </span>
+        <span class="adventure">冒険録</span>
+
+    </div>
+
+    <button class="start-button"
+        onclick="location.href='screenshot-list.html'">
+
+        START
+
+    </button>
+
+</div>
+
+<script>
+
+const images = [
+
+"index背景候補/index背景仮候補1.png",
+"index背景候補/index背景仮候補2.png",
+"index背景候補/index背景仮候補3.png",
+"index背景候補/index背景仮候補4.png",
+"index背景候補/index背景仮候補5.png",
+"index背景候補/index背景仮候補6.png"
+
+];
+
+const bg = document.getElementById("bg");
+
+let current = 0;
+
+bg.style.backgroundImage =
+`url('${images[current]}')`;
+
+setInterval(() => {
+
+    bg.style.opacity = 0;
+
+    setTimeout(() => {
+
+        current++;
+
+        if(current >= images.length){
+
+            current = 0;
+
+        }
+
+        bg.style.backgroundImage =
+        `url('${images[current]}')`;
+
+        bg.style.opacity = 1;
+
+    },2000);
+
+},7000);
+
+/*5秒表示 + 2秒フェード＝7秒ループ*/
+
+</script>
+
+</body>
+</html>
+
+
