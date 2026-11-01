@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>待機中</title>
+
+<style>
+
+body{
+
+    background:#111;
+
+    color:white;
+
+    font-family:"Yu Gothic",sans-serif;
+
+    text-align:center;
+
+    margin:0;
+}
+
+h1{
+
+    margin:40px 0;
+}
+
+#gallery{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+}
+
+#gallery img{
+
+    width:90%;
+
+    max-width:1400px;
+
+    margin-bottom:30px;
+
+    border-radius:10px;
+
+    box-shadow:0 0 15px rgba(255,255,255,0.3);
+}
+
+.back{
+
+    display:inline-block;
+
+    margin:50px;
+
+    padding:20px 40px;
+
+    background:white;
+
+    color:black;
+
+    text-decoration:none;
+
+    border-radius:15px;
+
+    font-size:1.2rem;
+
+    font-weight:bold;
+}
+
+.back:hover{
+
+    background:#ddd;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>待機中</h1>
+
+<div id="gallery"></div>
+
+<a class="back" href="screenshot-list.html">
+
+一覧へ戻る
+
+</a>
+
+<script>
+
+const gallery = document.getElementById("gallery");
+
+/*
+今後増える前提
+とりあえず300枚まで探索
+*/
+
+for(let i = 1; i <= 300; i++){
+
+    const img = document.createElement("img");
+
+    img.src =
+    `album/waiting/${String(i).padStart(3,'0')}.png`;
+
+    img.loading = "lazy";
+
+    img.onerror = function(){
+        this.remove();
+    };
+
+    gallery.appendChild(img);
+}
+
+</script>
+
+</body>
+
+</html>
