@@ -103,15 +103,36 @@ const gallery = document.getElementById("gallery");
 
 for(let i = 1; i <= 150; i++){
 
+    const number = String(i).padStart(3,'0');
+
     const img = document.createElement("img");
 
+    /*
+    まず png を探す
+    */
     img.src =
-    `album/2026-11-week1/${String(i).padStart(3,'0')}.png`;
+    `album/2026-11-week1/${number}.png`;
 
     img.loading = "lazy";
 
+    /*
+    png が無ければ JPG を探す
+    */
     img.onerror = function(){
-        this.remove();
+
+        if(!this.dataset.jpgTried){
+
+            this.dataset.jpgTried = "true";
+
+            this.src =
+            `album/2026-11-week1/${number}.JPG`;
+
+        }else{
+
+            this.remove();
+
+        }
+
     };
 
     gallery.appendChild(img);
