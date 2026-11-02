@@ -96,14 +96,43 @@ h1{
 
 const gallery = document.getElementById("gallery");
 
-for(let i = 1; i <= 74; i++){
+/*
+将来的な余裕を持たせる
+*/
+
+for(let i = 1; i <= 150; i++){
+
+    const number = String(i).padStart(3,'0');
 
     const img = document.createElement("img");
 
+    /*
+    まず png を探す
+    */
     img.src =
-    `album/2026-10-week1-4/${String(i).padStart(3,'0')}.png`;
+    `album/2026-10-week1-4/${number}.png`;
 
     img.loading = "lazy";
+
+    /*
+    png が無ければ jpg を探す
+    */
+    img.onerror = function(){
+
+        if(!this.dataset.jpgTried){
+
+            this.dataset.jpgTried = "true";
+
+            this.src =
+            `album/2026-10-week1-4/${number}.jpg`;
+
+        }else{
+
+            this.remove();
+
+        }
+
+    };
 
     gallery.appendChild(img);
 }
