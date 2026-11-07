@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>2026年11月 第1週目</title>
+<title>2026年11月 第1週目-1</title>
 
 <style>
 
@@ -114,7 +114,7 @@ h1{
 
 <body>
 
-<h1>2026年11月 第1週 料理集</h1>
+<h1>2026年11月 第1週目-1 料理集</h1>
 
 <button id="startButton" class="start">
 
@@ -184,9 +184,31 @@ function showSlide(){
 
     if(current >= slides.length){
 
-        document.body.innerHTML +=
-        "<h2>ご視聴ありがとうございました！</h2>";
-
+        image.style.display = "none";
+    
+        player.style.display = "none";
+    
+        document.body.innerHTML = `
+    
+            <div style="
+                display:flex;
+                flex-direction:column;
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+            ">
+    
+                <h1>ご視聴ありがとうございました！🍣</h1>
+    
+                <br>
+    
+                <a class="back" href="cooking-list.html">
+                    🍣 料理一覧へ戻る
+                </a>
+    
+            </div>
+        `;
+    
         return;
     }
 
@@ -210,7 +232,7 @@ function showSlide(){
 
             showSlide();
 
-        },2000);
+        },1000);
 
     };
 }
