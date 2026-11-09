@@ -110,6 +110,53 @@ h1{
     color:black;
 }
 
+#navArea{
+
+    margin:20px 0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:30px;
+}
+
+#navArea button{
+
+    width:60px;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    font-size:1.5rem;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+#navArea button:hover{
+
+    background:#ddd;
+}
+
+#pageInfo{
+
+    font-size:1.2rem;
+
+    color:white;
+
+    min-width:80px;
+}
+
+
 </style>
 
 </head>
@@ -132,6 +179,19 @@ h1{
 
 <audio id="player"></audio>
 
+<div id="navArea" style="display:none;">
+
+    <button id="prevBtn">◀</button>
+
+    <span id="pageInfo">
+        1 / 14
+    </span>
+
+    <button id="nextBtn">▶</button>
+
+</div>
+
+
 <br><br>
 
 <a class="back" href="cooking-list.html">
@@ -139,6 +199,10 @@ h1{
 🍣 料理一覧へ戻る
 
 </a>
+
+
+
+
 
 <script>
 
@@ -172,11 +236,22 @@ document.getElementById("player");
 const button =
 document.getElementById("startButton");
 
+const prevBtn =
+document.getElementById("prevBtn");
+
+const nextBtn =
+document.getElementById("nextBtn");
+
+const pageInfo =
+document.getElementById("pageInfo");
+
 button.addEventListener("click",startShow);
 
 function startShow(){
 
     button.style.display = "none";
+
+    document.getElementById("navArea").style.display = "flex";
 
     showSlide();
 }
@@ -236,7 +311,40 @@ function showSlide(){
         },1000);
 
     };
+
+    pageInfo.textContent =
+    `${current + 1} / ${slides.length}`;
+
 }
+
+prevBtn.addEventListener("click", () => {
+
+    if(current <= 0){
+        return;
+    }
+
+    player.pause();
+
+    current--;
+
+    showSlide();
+
+});
+
+nextBtn.addEventListener("click", () => {
+
+    if(current >= slides.length - 1){
+        return;
+    }
+
+    player.pause();
+
+    current++;
+
+    showSlide();
+
+});
+
 
 </script>
 
