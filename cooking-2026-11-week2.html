@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>2026年11月 第2週目 料理集</title>
+
+<style>
+
+body{
+
+    background:#111;
+
+    color:white;
+
+    font-family:"Yu Gothic",sans-serif;
+
+    text-align:center;
+
+    margin:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    min-height:100vh;
+}
+
+h1{
+
+    margin:30px 0;
+}
+
+#image{
+
+    width:auto;
+
+    height:70vh;
+
+    max-width:90vw;
+
+    object-fit:contain;
+
+    border-radius:10px;
+
+    box-shadow:0 0 20px rgba(255,255,255,0.3);
+}
+
+#player{
+
+    margin:20px 0;
+}
+
+.start{
+
+    padding:20px 50px;
+
+    font-size:1.5rem;
+
+    cursor:pointer;
+
+    border:none;
+
+    border-radius:15px;
+}
+
+.back{
+
+    display:inline-block;
+
+    margin-top:30px;
+
+    margin-bottom:30px;
+
+    padding:15px 35px;
+
+    background:white;
+
+    color:black;
+
+    text-decoration:none;
+
+    border-radius:15px;
+
+    font-size:1.1rem;
+
+    font-weight:bold;
+
+    box-shadow:0 0 10px rgba(255,255,255,0.2);
+
+    transition:0.3s;
+}
+
+.back:hover{
+
+    background:#ddd;
+
+    color:black;
+
+    transform:scale(1.05);
+}
+
+.back:visited{
+
+    color:black;
+}
+
+#navArea{
+
+    margin:20px 0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:30px;
+}
+
+#navArea button{
+
+    width:60px;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    font-size:1.5rem;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+#navArea button:hover{
+
+    background:#ddd;
+}
+
+#pageInfo{
+
+    font-size:1.2rem;
+
+    color:white;
+
+    min-width:80px;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<h1>2026年11月 第2週目 料理集</h1>
+
+<button id="startButton" class="start">
+
+スタート
+
+</button>
+
+<br><br>
+
+<img id="image" style="display:none;">
+
+<br>
+
+<audio id="player"></audio>
+
+<div id="navArea" style="display:none;">
+
+    <button id="prevBtn">◀</button>
+
+    <span id="pageInfo">
+        1 / 14
+    </span>
+
+    <button id="nextBtn">▶</button>
+
+</div>
+
+
+<br><br>
+
+<a class="back" href="cooking-list.html">
+
+🍣 料理一覧へ戻る
+
+</a>
+
+
+
+
+
+<script>
+
+const slides = [
+
+"001",
+"002",
+"003",
+"004",
+"005",
+"006",
+"007",
+"008",
+"009",
+"010",
+"011",
+"012",
+"013",
+"014"
+
+];
+
+let current = 0;
+
+const image =
+document.getElementById("image");
+
+const player =
+document.getElementById("player");
+
+const button =
+document.getElementById("startButton");
+
+const prevBtn =
+document.getElementById("prevBtn");
+
+const nextBtn =
+document.getElementById("nextBtn");
+
+const pageInfo =
+document.getElementById("pageInfo");
+
+button.addEventListener("click",startShow);
+
+function startShow(){
+
+    button.style.display = "none";
+
+    document.getElementById("navArea").style.display = "flex";
+
+    showSlide();
+}
+
+function showSlide(){
+
+    if(current >= slides.length){
+
+        image.style.display = "none";
+    
+        player.style.display = "none";
+    
+        document.body.innerHTML = `
+    
+            <div style="
+                display:flex;
+                flex-direction:column;
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+            ">
+    
+                <h1>ご視聴ありがとうございました！🍣</h1>
+    
+                <br>
+    
+                <a class="back" href="cooking-list.html">
+                    🍣 料理一覧へ戻る
+                </a>
+    
+            </div>
+        `;
+    
+        return;
+    }
+
+    const num = slides[current];
+
+    image.style.display = "block";
+
+    image.src =
+    `album/cooking/2026-11-week2/${num}.JPG`;
+
+    player.src =
+    `album/cooking/2026-11-week2/${num}.mp3`;
+
+    player.play();
+
+    player.onended = function(){
+
+        setTimeout(() => {
+
+            current++;
+
+            showSlide();
+
+        },1000);
+
+    };
+
+    pageInfo.textContent =
+    `${current + 1} / ${slides.length}`;
+
+}
+
+prevBtn.addEventListener("click", () => {
+
+    if(current <= 0){
+        return;
+    }
+
+    player.pause();
+
+    current--;
+
+    showSlide();
+
+});
+
+nextBtn.addEventListener("click", () => {
+
+    if(current >= slides.length - 1){
+        return;
+    }
+
+    player.pause();
+
+    current++;
+
+    showSlide();
+
+});
+
+
+</script>
+
+</body>
+
+</html>
